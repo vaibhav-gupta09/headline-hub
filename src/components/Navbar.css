@@ -1,0 +1,10 @@
+.list-group-item:hover {
+  background-color: orangered;
+  border-radius: 15px;
+}
+
+.navbar_fix{
+  position: fixed;
+  top: 0;
+  width: 100%;
+}

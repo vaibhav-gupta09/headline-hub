@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from 'react'
+import Navbar from './components/Navbar'
+import Home from './pages/Home';
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import FetchData from './components/FetchData';
+import Footer from './components/Footer';
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="wrapper min-vh-100 d-flex flex-column">
+      <Router>
+         <Navbar/>
+        <Routes>
+          <Route exact path="/" element={<Home/>}/>
+          <Route exact path="/business" element={<FetchData cat="business"/>}/>
+          <Route exact path="/entertainment" element={<FetchData cat="entertainment"/>}/>
+          <Route exact path="/health" element={<FetchData cat="health"/>}/>
+          <Route exact path="/science" element={<FetchData cat="science"/>}/>
+          <Route exact path="/sports" element={<FetchData cat="sports"/>}/>
+          <Route exact path="/technology" element={<FetchData cat="technology"/>}/>
+        </Routes>
+        <Footer class="mt-auto">
+        </Footer>
+      </Router>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
