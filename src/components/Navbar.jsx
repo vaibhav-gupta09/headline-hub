@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import './Navbar.css'
 const Navbar = () => {
   return (
     <div>
       <nav className="navbar navbar_fix navbar-dark bg-dark text-white navbar-expand-lg">
         <div className="container-fluid ">
           <Link className="navbar-brand" to="/">
-            The Headline Hub
+            <h2 className="nav-item list-group-item p-1">THB</h2>
           </Link>
           <button
             className="navbar-toggler"
@@ -24,6 +24,8 @@ const Navbar = () => {
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item list-group-item p-1">
                 <Link
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
                   className="nav-link active text-white"
                   aria-current="page"
                   to="/"
@@ -33,6 +35,8 @@ const Navbar = () => {
               </li>
               <li className="nav-item text-white list-group-item p-1">
                 <Link
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
                   className="nav-link active list-group-item-action primary"
                   aria-current="page"
                   to="/business"
@@ -42,6 +46,8 @@ const Navbar = () => {
               </li>
               <li className="nav-item text-white list-group-item p-1">
                 <Link
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
                   className="nav-link active"
                   aria-current="page"
                   to="/entertainment"
@@ -51,6 +57,19 @@ const Navbar = () => {
               </li>
               <li className="nav-item text-white list-group-item p-1">
                 <Link
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/politics"
+                >
+                  Politics
+                </Link>
+              </li>
+              <li className="nav-item text-white list-group-item p-1">
+                <Link
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
                   className="nav-link active"
                   aria-current="page"
                   to="/health"
@@ -60,15 +79,8 @@ const Navbar = () => {
               </li>
               <li className="nav-item text-white list-group-item p-1">
                 <Link
-                  className="nav-link active"
-                  aria-current="page"
-                  to="/science"
-                >
-                  Science
-                </Link>
-              </li>
-              <li className="nav-item text-white list-group-item p-1">
-                <Link
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
                   className="nav-link active"
                   aria-current="page"
                   to="/sports"
@@ -78,11 +90,35 @@ const Navbar = () => {
               </li>
               <li className="nav-item text-white list-group-item p-1">
                 <Link
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/science"
+                >
+                  Science
+                </Link>
+              </li>
+              <li className="nav-item text-white list-group-item p-1">
+                <Link
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
                   className="nav-link active"
                   aria-current="page"
                   to="/technology"
                 >
                   Technology
+                </Link>
+              </li>
+              <li className="nav-item text-white list-group-item p-1">
+                <Link
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/world"
+                >
+                  World
                 </Link>
               </li>
             </ul>

@@ -2,30 +2,28 @@ import React ,{ useEffect, useState }  from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import moment from "moment";
+import './FetchData.css';
 const FetchData = ({cat}) => {
   const [Data, setData] = useState("")
-
-  const twoWeeksAgo = new Date();
-  twoWeeksAgo.setDate(twoWeeksAgo.getDate()-7);
-  const formattedDate = moment(twoWeeksAgo).format("MMM D, YYYY");
-  
-  const fetchData = async () =>{
+  const [nextPage, setNextPage] = useState("null");
+   const handleClick = () => {
+     Data.nextPage ? setNextPage(Data.nextPage) : setNextPage(null);
+   };
+    
+    const fetchData = async () =>{
     await axios
       .get(
-        // cat
-        //   ? `https://newsapi.org/v2/everything?q=${cat}&from=${formattedDate}&apiKey=0a7d305660b04bab8280625c56414261`
-        //   : "https://newsapi.org/v2/everything?q=general&apiKey=0a7d305660b04bab8280625c56414261"
         cat
-          ? `https://newsdata.io/api/1/news?apikey=pub_18122eba97267e9e8e50bb5282a9911d37391&language=en&category=${cat}&country=in`
-          : "https://newsdata.io/api/1/news?apikey=pub_18122eba97267e9e8e50bb5282a9911d37391&language=en&&category=top&country=in"
+          ? `https://newsdata.io/api/1/news?apikey=pub_18122eba97267e9e8e50bb5282a9911d37391&language=en&category=${cat}&country=in&page=${nextPage}`
+          : `https://newsdata.io/api/1/news?apikey=pub_18122eba97267e9e8e50bb5282a9911d37391&language=en&&category=top&country=in&page=${nextPage}`
       )
-      // .then((res) => console.log(res));
-      .then((res) => setData(res.data.results));
+      .then((res) => setData(res.data));
   };
 
   useEffect(() => {
     fetchData();
-  }, [cat]);
+    window.scrollTo(0, 0);
+  }, [cat, nextPage]);
   
   return (
     <div className="container my-4">
@@ -34,7 +32,7 @@ const FetchData = ({cat}) => {
       </h3>
       <div className="my-2 row">
         {Data
-          ? Data.map((items, index) => (
+          ? Data.results.map((items, index) => (
               <>
                 <div
                   className="container my-4 p-4 col-md-10"
@@ -52,12 +50,6 @@ const FetchData = ({cat}) => {
                           ? items.image_url
                           : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOoiis2FsTZo0uN6q5mUd9nODAcpX8dUTfTpladKkp-mmipH_7kX--R-rIKJXD-gCm58g&usqp=CAU"
                       }
-                      // alt="image not found"
-                      // onError={(e) => {
-                      //   e.target.onerror = null; // to prevent an infinite loop of fallbacks
-                      //   e.target.src =
-                      //     "https://englishtribuneimages.blob.core.windows.net/gallary-content/2023/3/2023_3$largeimg_1889805422.jpg"; // replace the image with the alternate one
-                      // }}
                       className="img-fluid col-md-10"
                       style={{
                         width: "100%",
@@ -68,19 +60,30 @@ const FetchData = ({cat}) => {
                   </div>
 
                   <p className="my-1 col-md-10">
-                    {items.description.substring(0, 500)}
+                    {items.content
+                      ? items.content.substring(
+                          0,
+                          Math.min(items.content.length, 500)
+                        )
+                      : "We apologize, the full article description is currently unavailable. Please click on the View More button to see the full article."}
                   </p>
                   <a href={items.link} target="blank">
-                    view more
+                    Read More
                   </a>
                 </div>
               </>
             ))
           : "Loading..."}
       </div>
-      
+      <div className="d-flex justify-content-center mt-5">
+        <button
+          onClick={handleClick}
+          className="btn-custom"
+        >
+          Show More
+        </button>
+      </div>
     </div>
-    // <div>news</div>
   );
 }
 

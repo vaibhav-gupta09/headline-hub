@@ -13,10 +13,12 @@ const App = () => {
           <Route exact path="/" element={<Home/>}/>
           <Route exact path="/business" element={<FetchData cat="business"/>}/>
           <Route exact path="/entertainment" element={<FetchData cat="entertainment"/>}/>
+          <Route exact path="/politics" element={<FetchData cat="politics"/>}/>
           <Route exact path="/health" element={<FetchData cat="health"/>}/>
           <Route exact path="/science" element={<FetchData cat="science"/>}/>
           <Route exact path="/sports" element={<FetchData cat="sports"/>}/>
           <Route exact path="/technology" element={<FetchData cat="technology"/>}/>
+          <Route exact path="/world" element={<FetchData cat="world"/>}/>
         </Routes>
         <Footer class="mt-auto">
         </Footer>
